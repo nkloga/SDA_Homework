@@ -1,3 +1,8 @@
+
+/* Exercise N.5
+Create stack with array as data storage.
+*/
+
 public class FifthMain {
     public static void main(String[] args) {
         Stack stack = new Stack(10);
