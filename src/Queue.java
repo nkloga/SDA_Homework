@@ -1,50 +1,56 @@
+import java.util.Arrays;
+
 public class Queue {
-    private int arrayMaxSize;
-    private int arraySize = -1;
+    private int queueSize = 0;
     private int[] array;
 
     public Queue(int arrayMaxSize) {
-        this.arrayMaxSize = arrayMaxSize;
         this.array = new int[arrayMaxSize];
     }
 
     public Queue copy() {
-        Queue stack = new Queue(arrayMaxSize);
-        stack.arraySize = this.arraySize;
-        stack.array = this.array;
-        stack.arrayMaxSize = this.arrayMaxSize;
-        return stack;
+        Queue queueCopy = new Queue(array.length);
+        queueCopy.array = Arrays.copyOf(this.array, array.length);
+        queueCopy.queueSize = this.queueSize;
+        return queueCopy;
     }
 
     public void enqueue(int value) {
-        arraySize++;
-        if (arraySize < arrayMaxSize) {
-            array[arraySize] = value;
+        if (queueSize < array.length) {
+            array[queueSize] = value;
         } else {
-            throw new ArrayIndexOutOfBoundsException("Overflow");
+            throw new IllegalStateException("Overflow");
         }
+        increaseQueue();
     }
 
-    public void dequeue() {
-        if (arraySize > 0) {
-            arraySize--;
+    public int dequeue() {
+        if (queueSize > 0) {
+            int returnValue = array[0];
+            decreaseQueue();
             array[0] = 0;
-            for (int i = 0; i < arraySize + 1; i++) {
+            for (int i = 0; i < queueSize + 1; i++) {
                 array[i] = array[i + 1];
             }
+            return returnValue;
         } else {
-            throw new ArrayIndexOutOfBoundsException("Underflow");
+            throw new IllegalStateException("Underflow");
         }
     }
 
+
+    private void increaseQueue(){ queueSize++; }
+
+    private void decreaseQueue(){ queueSize--; }
+
     public int size() {
-        return arraySize + 1;
+        return queueSize;
     }
 
     public String toString() {
         String returnString = "";
-        for (int i = 0; i < arraySize + 1; i++) {
-            if (i == arraySize) {
+        for (int i = 0; i < queueSize; i++) {
+            if (i == queueSize-1) {
                 returnString += array[i] + "";
             } else {
                 returnString += array[i] + " -> ";

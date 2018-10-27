@@ -1,0 +1,23 @@
+FirstFactorial:
++    1. use => instead of  > something + 1
++    2. factorial has while???
+SecondNumberInput:
++    3. if brackets!
++    !. continue and break, break in while loop breaks from the loop, continue skips all steps after and goes back to while
+    !. for(int i = 0; i < 5; ){ // it is possible to change increment inside the for loop
+        ....
+        i++;
+        }
+ThirdNumberInput:
++    4. initial values are 0, should be Integer.MAX_VALUE - max int value
+FourthNumberInput:
+    5. it is possible to add more than 5 negative numbers, counter can go below 0, implement in two separate blocks
+        even better to make a method that could be called twice
+    !. use TDD for homeworks
+FifthMain
+    6. refactor, review his code, stack, too many variables, use freeElements variables and initiate other variables in methods
+    7. copy doesn't work correctly, add more value to the stack copy, use final?
+SixthMain
+    8. replace ArrayIndexOutOfBoundsException with IllegalStateException, don't show how is it implemented,
+    people could make different assumptions, use general
+    9. dequeue должно возвращать удаленное значение

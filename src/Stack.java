@@ -1,46 +1,49 @@
+import java.util.Arrays;
+
 public class Stack {
-    private int arrayMaxSize;
-    private int arraySize = -1;
+    private int stackSize = 0;
     private int[] array;
 
     public Stack(int arrayMaxSize) {
-        this.arrayMaxSize = arrayMaxSize;
         this.array = new int[arrayMaxSize];
     }
 
     public Stack copy() {
-        Stack stack = new Stack(arrayMaxSize);
-        stack.arraySize = this.arraySize;
-        stack.array = this.array;
-        stack.arrayMaxSize = this.arrayMaxSize;
-        return stack;
+        Stack stackCopy = new Stack(array.length);
+        stackCopy.array = Arrays.copyOf(this.array, array.length);
+        stackCopy.stackSize = this.stackSize;
+        return stackCopy;
     }
 
     public void push(int value) {
-        arraySize++;
-        if (arraySize < arrayMaxSize) {
-            array[arraySize] = value;
+        if (stackSize < array.length) {
+            array[stackSize] = value;
         } else {
-            throw new ArrayIndexOutOfBoundsException("Overflow");
+            throw new IllegalStateException("Overflow");
         }
+        increaseStackSize();
     }
 
     public void pop() {
-        if (arraySize > 0) {
-            arraySize--;
+        if (stackSize > 0) {
+            decreaseStackSize();
         } else {
-            throw new ArrayIndexOutOfBoundsException("Underflow");
+            throw new IllegalStateException("Underflow");
         }
     }
 
     public int size() {
-        return arraySize + 1;
+        return stackSize;
     }
+
+    private void increaseStackSize(){ stackSize++; }
+
+    private void decreaseStackSize(){ stackSize--; }
 
     public String toString() {
         String returnString = "";
-        for (int i = 0; i < arraySize + 1; i++) {
-            if (i == arraySize) {
+        for (int i = 0; i < stackSize; i++) {
+            if (i == stackSize-1) {
                 returnString += array[i] + "";
             } else {
                 returnString += array[i] + " -> ";
